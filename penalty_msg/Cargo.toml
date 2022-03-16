@@ -1,0 +1,16 @@
+[package]
+name = "penalty_msg"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+#rocket = "0.5.0-rc.1"
+#tokio = { version = "1", features = ["full"] }
+#tokio = { version = "0.3.7",features = ["full"]} # copy from actix-rt
+
+chrono = "0.4"
+sqlx = { version = "0.4.2", features = [ "runtime-actix-native-tls", "mysql", "decimal", "chrono" ] }
+rust_decimal = "1.20"
+actix-web = "3"

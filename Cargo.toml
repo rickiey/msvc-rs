@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "penalty_msg",
+    "cron",
+    "utils",
+]
