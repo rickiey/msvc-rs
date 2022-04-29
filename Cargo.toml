@@ -4,4 +4,5 @@ members = [
     "penalty_msg",
     "cron",
     "utils",
+    "labs",
 ]
