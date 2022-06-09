@@ -5,4 +5,5 @@ members = [
     "cron",
     "utils",
     "labs",
+    "rocket_svc"
 ]
