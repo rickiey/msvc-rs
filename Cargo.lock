@@ -366,6 +366,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.57"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08f9b8508dccb7687a1d6c4ce66b2b0ecef467c94667de27d8d7fe1f8d2a9cdc"
+
+[[package]]
 name = "arrayvec"
 version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -977,6 +983,23 @@ dependencies = [
  "crc32fast",
  "libc",
  "miniz_oxide",
+]
+
+[[package]]
+name = "flexi_logger"
+version = "0.22.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee9a6796ff68a1014f6665dac55341820f26e63ec706e58bfaee468cf0ac174f"
+dependencies = [
+ "ansi_term",
+ "atty",
+ "glob",
+ "lazy_static",
+ "log",
+ "regex",
+ "rustversion",
+ "thiserror",
+ "time 0.3.9",
 ]
 
 [[package]]
@@ -2500,13 +2523,17 @@ dependencies = [
 name = "rocket_svc"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "chrono",
+ "flexi_logger",
+ "log",
  "rocket",
  "rocket_db_pools",
  "serde",
  "serde_derive",
  "serde_json",
  "sqlx 0.5.13",
+ "time 0.3.9",
  "tokio 1.18.0",
 ]
 

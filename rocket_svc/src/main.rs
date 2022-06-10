@@ -2,15 +2,15 @@
 extern crate rocket;
 extern crate serde_json;
 
-use std::task::Poll::Pending;
-
-use chrono::{NaiveDate, NaiveDateTime};
-use rocket::futures::StreamExt;
-use rocket::serde::de::value::StrDeserializer;
+use chrono::NaiveDateTime;
 use rocket_db_pools::{Connection, Database};
 use rocket_db_pools::sqlx;
 use serde::{Deserialize, Serialize};
-use sqlx::sqlite::SqliteRow;
+
+use config::logger::init_logger;
+
+mod config;
+
 
 #[derive(Database)]
 #[database("db")]
@@ -23,17 +23,21 @@ async fn read(mut db: Connection<DBpool>, from_addr: String) -> String {
     // .and_then(|r| Ok(r))
     // .ok()
 
+    log::info!("from_addr {}", from_addr);
+    log::warn!("lens {}", rows.len());
     return serde_json::to_string(&rows).unwrap();
 }
 
 #[get("/hello")]
 fn index() -> &'static str {
+    log::info!("hello world");
     "{Hello,world!}"
 }
 
 
 #[launch]
 fn rocket() -> _ {
+    let _ = init_logger();
     rocket::build().attach(DBpool::init()).mount("/", routes![read, index])
 }
 
