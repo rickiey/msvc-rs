@@ -31,16 +31,23 @@ async fn read(mut db: Connection<DBpool>, from_addr: String) -> String {
 #[get("/hello")]
 fn index() -> &'static str {
     log::info!("hello world");
-    "{Hello,world!}"
+    "{\"Hello,\":\"world!\"}"
 }
 
 
 #[launch]
 fn rocket() -> _ {
     let _ = init_logger();
+    // rocket::build().manage()
     rocket::build().attach(DBpool::init()).mount("/", routes![read, index])
 }
 
+// create table penalty_msgs (height int, from_addr text, to_addr text,amount text,call_function text,sub_cause text, time_at TEXT )
+/*
+insert into penalty_msgs values(233,"asd","qwe","0.232354564","call","sub","2020-05-05 14:12:23");
+
+ curl -s localhost:8000/asd | jq
+*/
 #[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow)]
 pub struct PenaltyMsg {
     height: i64,
@@ -52,6 +59,7 @@ pub struct PenaltyMsg {
     sub_cause: String,
     time_at: NaiveDateTime,
 }
+
 // fn main() {
 //     rocket();
 //     println!("Hello, world!");

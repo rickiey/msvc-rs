@@ -35,7 +35,7 @@ fn log_json_format(
         writer,
         r#"{{"level":"{}","ts":"{}","logger":"{}","caller":"{}:{}","msg":{:?}}}"#,
         level,
-        now.format(DEFAULT_TIME_FORMAT),
+        now.format("%Y-%m-%d %H:%M:%S"),
         record.module_path().unwrap_or("<unnamed>"),
         record.file().unwrap_or("<unnamed>"),
         record.line().unwrap_or(0),
@@ -50,6 +50,7 @@ const TIME_FORMAT: &[time::format_description::FormatItem<'static>] = time::macr
 // const DEFAULT_TIME_FORMAT: &[time::format_description::FormatItem<'static>] = time::macros::format_description!(
 //     "[year]-[month]-[day]T[hour]:[minute]:[second].[subsecond digits:3]"
 // );
+#[allow(dead_code)]
 const DEFAULT_TIME_FORMAT: &[time::format_description::FormatItem<'static>] = time::macros::format_description!(
     "[year]-[month]-[day]T[hour]:[minute]:[second]"
 );
