@@ -9,10 +9,10 @@ pub fn init_logger() -> anyhow::Result<()> {
                 .basename("msvc_rs")
         )
         .write_mode(WriteMode::BufferAndFlush)
-        .rotate(                      // If the program runs long enough,
-                                      Criterion::Age(Age::Day), // - create a new file every day
-                                      Naming::Timestamps,       // - let the rotated files have a timestamp in their name
-                                      Cleanup::KeepLogFiles(7), // - keep at most 7 log files
+        .rotate(// If the program runs long enough,
+                Criterion::Age(Age::Day), // - create a new file every day
+                Naming::Timestamps,       // - let the rotated files have a timestamp in their name
+                Cleanup::KeepLogFiles(7), // - keep at most 7 log files
         )
         .append()
         .start()?;
@@ -37,8 +37,7 @@ fn log_json_format(
         level,
         now.format("%Y-%m-%d %H:%M:%S"),
         record.module_path().unwrap_or("<unnamed>"),
-        record.file().unwrap_or("<unnamed>"),
-        record.line().unwrap_or(0),
+        record.file().unwrap_or("<unnamed>"),record.line().unwrap_or(0),
         &record.args().to_string()
     )
 }
