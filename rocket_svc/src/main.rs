@@ -7,6 +7,7 @@ use config::logger::init_logger;
 mod router;
 mod config;
 mod model;
+mod svc;
 
 use config::Config;
 // use model::db_pool::{DBpool};
@@ -37,7 +38,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .attach(CORS)
         .mount(
             Config::default().base,
-            routes![index::read, index::index],
+            routes![index::read, index::index, index::insert],
         )
         .manage(pool)
         .launch()
