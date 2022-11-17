@@ -2,6 +2,7 @@ use sqlx::{Pool, MySql};
 use rocket::{State, get, post};
 use rocket::serde::json::Json;
 use rocket::http::{Status};
+use crate::model::APIResponse;
 use crate::svc::penalty_msg::PenaltyMsgSvc;
 use crate::model::penalty_msg::PenaltyMsg;
 
@@ -25,12 +26,26 @@ pub async fn read( db: &State<Pool<MySql>>, from_addr: String) -> Result<Json<Ve
 }
 
 #[post("/penalty-msg", data = "<pmsg>")]
-pub async fn insert( db: &State<Pool<MySql>>, pmsg: Json<PenaltyMsg>) -> Result<(), Status> {
+pub async fn insert( db: &State<Pool<MySql>>, pmsg: Json<PenaltyMsg>) -> Result<Json<APIResponse<u64>>, Status> {
 
     let res = PenaltyMsgSvc::create_pmsg(db, pmsg.0).await;
 
+    // let mut s = APIResponse{
+    //     code:0,
+    //     msg: "".to_string(),
+    //     val: 0,
+    // };
+
+    let mut s = APIResponse::default();
     match res {
-        Ok(_) => Ok(()),
-        _ => Err(Status::NotFound),
+        Ok(id) => {
+            log::warn!("val ------------ {}", s.val);
+            s.val = id;
+            Ok(Json(s))
+        },
+        Err(e) => {
+            log::error!("error : {}", e);
+            Err(Status::NotFound)
+        }
     }
 }

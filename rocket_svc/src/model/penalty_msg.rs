@@ -12,11 +12,11 @@ insert into penalty_msgs values(233,"asd","qwe","0.232354564","call","sub","2020
 #[derive(Debug, Clone, Serialize, Deserialize, sqlx::FromRow)]
 pub struct PenaltyMsg {
     pub height: u64,
-    from_addr: String,
-    to_addr: String,
-    amount: String,
+    pub from_addr: String,
+    pub to_addr: String,
+    pub amount: String,
     // amount_v: Decimal,
-    call_function: String,
-    sub_cause: String,
-    time_at: NaiveDateTime,
+    pub call_function: String,
+    pub sub_cause: String,
+    pub time_at: NaiveDateTime,
 }
