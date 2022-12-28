@@ -6,5 +6,6 @@ members = [
     "utils",
     "labs",
     "rocket_svc",
-    "leetcode"
+    "leetcode",
+    "grpc_tonic"
 ]
