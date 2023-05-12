@@ -7,5 +7,6 @@ members = [
     "labs",
     "rocket_svc",
     "leetcode",
-    "grpc_tonic"
+    "grpc_tonic",
+    "axum_svc"
 ]
