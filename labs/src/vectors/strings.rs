@@ -10,3 +10,15 @@ pub fn string_len() {
         print!("{} ", i);
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use crate::vectors::strings;
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+
+        strings::string_len();
+    }
+}

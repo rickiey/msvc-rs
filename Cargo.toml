@@ -1,4 +1,5 @@
 [workspace]
+resolver = "2"
 
 members = [
     "penalty_msg",
@@ -10,3 +11,30 @@ members = [
     "grpc_tonic",
     "axum_svc"
 ]
+
+
+[profile.dev]
+opt-level = 0
+# 0: no optimizations
+#1: basic optimizations
+#2: some optimizations
+#3: all optimizations
+#"s": optimize for binary size
+#"z": optimize for binary size, but also turn off loop vectorization.# Use slightly better optimizations.
+debug = true
+split-debuginfo = '...'  # Platform-specific.
+strip = false
+debug-assertions = true
+overflow-checks = true
+lto = false
+# The lto setting controls rustc’s -C lto, -C linker-plugin-lto, and -C embed-bitcode options,
+#   which control LLVM’s link time optimizations. LTO can produce better optimized code,
+#   using whole-program analysis, at the cost of longer linking time.
+# false: Performs “thin local LTO” which performs “thin” LTO on the local crate only across its codegen units. No LTO is performed if codegen units is 1 or opt-level is 0.
+# true or "fat": Performs “fat” LTO which attempts to perform optimizations across all crates within the dependency graph.
+# "thin": Performs “thin” LTO. This is similar to “fat”, but takes substantially less time to run while still achieving performance gains similar to “fat”.
+# "off": Disables LTO.
+panic = 'unwind'
+incremental = true
+codegen-units = 256
+rpath = false
