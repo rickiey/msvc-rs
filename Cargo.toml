@@ -9,8 +9,10 @@ members = [
     "rocket_svc",
     "leetcode",
     "grpc_tonic",
-    "axum_svc"
-]
+    "axum_svc",
+    "sqlxx",
+    "lsea_orm",
+    "btc"]
 
 
 [profile.dev]
